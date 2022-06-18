@@ -5,6 +5,6 @@ class RegistrationsController < Devise::RegistrationsController
     raise AuthenticationError::CredentialInvalid, "Error creating account: #{@user.errors.message}" unless @user.save!
 
     set_authorization_header(@user)
-    render 'users/show'
+    head :no_content
   end
 end

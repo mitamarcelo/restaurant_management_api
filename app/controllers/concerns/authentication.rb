@@ -38,6 +38,7 @@ module Authentication
   end
 
   def generate_access_token(user)
-    JWT.encode({ uid: user.jti, exp: 1.days.from_now.to_i }, ENV['DEVISE_SECRET_KEY'])
+    JWT.encode({ uid: user.jti, user: { name: user.name, email: user.email }, exp: 1.days.from_now.to_i },
+               ENV['DEVISE_SECRET_KEY'])
   end
 end

@@ -10,7 +10,7 @@ class SessionsController < Devise::SessionsController
       user_params[:password]
     )
     set_authorization_header(@user)
-    render 'users/show'
+    head :no_content
   end
 
   private
