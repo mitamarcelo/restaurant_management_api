@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :restaurants, only: %i[index show create update destroy]
+  resources :restaurants do
+    resources :menus
+  end
 
   devise_for :users,
              path: '',

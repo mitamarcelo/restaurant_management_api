@@ -1,4 +1,7 @@
 {
+    "ruby.rubocop.executePath": "/home/mita/.rvm/gems/ruby-3.1.2/bin/",
+    "ruby.rubocop.configFilePath": "/home/mita/Desktop/projects/personal_github/restaurant_management_api/.rubocop.yml",
+    "ruby.rubocop.onSave": true,
     "editor.defaultFormatter": "misogi.ruby-rubocop",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
