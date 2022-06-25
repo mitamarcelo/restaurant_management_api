@@ -1,10 +1,11 @@
 class MenusController < ApplicationController
+  include RestaurantConcern
   before_action :authenticate_user!
   before_action :set_restaurant
   before_action :set_menu, only: %i[show update destroy]
 
   def index
-    @menus = @restaurant.menus
+    @menus = restaurant.menus
     render 'menus/index'
   end
 
@@ -13,7 +14,7 @@ class MenusController < ApplicationController
   end
 
   def create
-    @menu = Menu.create(menu_params.merge(restaurant: @restaurant))
+    @menu = Menu.create(menu_params.merge(restaurant:))
     if @menu
       render 'menus/show'
     else
@@ -46,10 +47,6 @@ class MenusController < ApplicationController
   end
 
   def set_menu
-    @menu = @restaurant.menus.find(params[:id])
-  end
-
-  def set_restaurant
-    @restaurant = current_user.restaurants.find(params[:restaurant_id])
+    @menu = restaurant.menus.find(params[:id])
   end
 end

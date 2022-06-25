@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :restaurants do
     resources :menus
+    resources :plates
   end
 
   devise_for :users,
