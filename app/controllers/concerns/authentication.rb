@@ -8,9 +8,9 @@ module Authentication
   def authenticate_user!
     jwt_payload = process_authorization_token
 
-    raise AuthenticationError::Unauthorized, 'Access Token: User identifier missing' unless jwt_payload['uid']
+    raise AuthenticationError::Unauthorized, 'Access Token: User identifier missing' unless jwt_payload['jti']
 
-    @current_user = User.find_by_jti(jwt_payload['uid'])
+    @current_user = User.find_by_jti(jwt_payload['jti'])
     raise AuthenticationError::Unauthorized, 'Access Token: User identifier invalid' unless @current_user.present?
   end
 
@@ -26,7 +26,6 @@ module Authentication
 
   def process_authorization_token
     token = request.headers['Authorization']
-    token ||= request.query_parameters['access_token']
     raise AuthenticationError::Unauthorized, 'Authorization not provided' unless token.present?
 
     jwt = token.split(' ').last
@@ -38,7 +37,6 @@ module Authentication
   end
 
   def generate_access_token(user)
-    JWT.encode({ uid: user.jti, user: { name: user.name, email: user.email }, exp: 1.days.from_now.to_i },
-               ENV['DEVISE_SECRET_KEY'])
+    JWT.encode(user.jwt_payload, ENV['DEVISE_SECRET_KEY'])
   end
 end
