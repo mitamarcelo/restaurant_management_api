@@ -39,6 +39,7 @@ gem 'rack-cors'
 gem 'devise'
 gem 'devise-jwt'
 gem 'figaro'
+gem 'openssl'
 
 gem 'friendly_id', '~> 5.4.0'
 

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :restaurants do
-    resources :menus
-    resources :plates
+    resources :menus do
+      resources :plates
+    end
   end
 
   devise_for :users,

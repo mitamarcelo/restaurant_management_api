@@ -25,4 +25,6 @@ r7 = Restaurant.find_or_create_by(name: 'Restaurant 7')
 u1.restaurants = [r1, r2, r3, r7]
 u2.restaurants = [r4, r5, r6, r7]
 
-m1 = Menu.find_or_create_by()
+puts 'Creating Menus'
+m1 = Menu.find_or_create_by(name: 'Menu 1', restaurant: r1)
+m2 = Menu.find_or_create_by(name: 'Menu 2', restaurant: r2)

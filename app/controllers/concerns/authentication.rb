@@ -27,9 +27,8 @@ module Authentication
   def process_authorization_token
     token = request.headers['Authorization']
     raise AuthenticationError::Unauthorized, 'Authorization not provided' unless token.present?
-
     jwt = token.split(' ').last
-    JWT.decode(jwt, ENV['DEVISE_SECRET_KEY']).first
+    JWT.decode(jwt, Rails.application.credentials.devise_secret_key!).first
   end
 
   def set_authorization_header(user)
@@ -37,6 +36,6 @@ module Authentication
   end
 
   def generate_access_token(user)
-    JWT.encode(user.jwt_payload, ENV['DEVISE_SECRET_KEY'])
+    JWT.encode(user.jwt_payload, Rails.application.credentials.devise_secret_key!)
   end
 end
